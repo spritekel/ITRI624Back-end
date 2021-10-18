@@ -12,9 +12,14 @@ app.get('/', (req, res) => {
 })
 
 //Listen at port defined earlier
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log('Project Management Toolkit API running on port: ' + port)
 })
+
+
+/*app.listen(port, () => {
+  console.log('Project Management Toolkit API running on port: ' + port)
+})*/
 
 //Link the app to the routes
 var routes = require('./routes')
