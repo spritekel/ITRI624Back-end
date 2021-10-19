@@ -4,7 +4,7 @@ var passport = require("passport");
 var bodyParser = require("body-parser");
 var LocalStrategy = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
-var User = require("./Models/userModel");
+const User = require("../Models/userModel");
 const bycrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
