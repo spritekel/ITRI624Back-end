@@ -1,4 +1,5 @@
-const mongoose = require("../database")
+const e = require('express');
+const mongoose = require("mongoose");
 
 var userSchema = new mongoose.Schema({
     _id : new mongoose.Types.ObjectId(),
