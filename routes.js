@@ -5,7 +5,7 @@ module.exports = function(app) {
     var business_case = require('./Documents/Business_Case/business_case');
     var project = require('./Documents/Project/project');
     var documentController = require('./Documents/documentController');
-    var userController
+    var userController = require('./Documents/UserController')
     //Create RESTful API codes and link them to methods in the business_case
     app.route('/document/:id/:name')
         .post(documentController.create_document)
