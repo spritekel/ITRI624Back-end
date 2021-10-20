@@ -8,7 +8,7 @@ require('dotenv').config();
 
 router.get('/',UserController.user_get_all);
 
-router.get('/:username', UserController.user_get_single );
+router.get('/:username', UserController.user_get_single);
 
 router.patch('/:username', UserController.user_patch);
 

@@ -33,8 +33,8 @@ exports.user_get_all = (req, res, next) => {
 }
 
 exports.user_get_single = (req, res, next) =>{
-    Username.find({username: req.params.username})
-    .select('_id username role')
+    User.find({username: req.params.username})
+    .select('_id role')
     .exec()
     .then(doc => {
         if(doc)
@@ -95,8 +95,8 @@ exports.user_patch = (req, res, next) =>{
 
 //change to find user by email
 exports.user_delete = (req, res, next) =>{
-    const username = req.params.username;
-    User.remove({email: id}).exec()
+    const id = req.params.username;
+    User.remove({username: id}).exec()
     .then(result => {
         res.status(200).json({
             message : 'User deleted successfully',
