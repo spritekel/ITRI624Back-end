@@ -1,26 +1,8 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const http = require('http');
+const app = require('./app');
 
-//Add body parser
-const bodyParser = require('body-parser');
-app.use(bodyParser());
+const port = process.env.PORT || 5000;
 
-//Home page
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const server = http.createServer(app);
 
-//Listen at port defined earlier
-app.listen(process.env.PORT || port, () => {
-  console.log('Project Management Toolkit API running on port: ' + port)
-})
-
-
-/*app.listen(port, () => {
-  console.log('Project Management Toolkit API running on port: ' + port)
-})*/
-
-//Link the app to the routes
-var routes = require('./routes')
-routes(app);
+server.listen(port);
