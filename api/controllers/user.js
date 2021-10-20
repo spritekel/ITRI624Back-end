@@ -144,7 +144,7 @@ exports.user_signup = (req, res, next) =>{
                         _id : new mongoose.Types.ObjectId(),
                         username: req.body.username,
                         role: req.body.role,
-                        password: req.body.password
+                        password: hash
                     });
                     user.save()
                     .then(result => {
@@ -169,32 +169,29 @@ exports.user_login = (req, res, next) =>{
     User.find({username: req.body.username})
     .exec()
     .then(user=> {
-        if(user.length <1)
+        if(user.length < 1)
         {
             return res.status(401).json({
-                message: 'Auth failed'
+                message: 'No user'
             });
         }
         bycrypt.compare(req.body.password, user[0].password, (err, result) =>{
             if(err)
             {
                 return res.status(401).json({
-                    message: 'Auth failed'
+                    message: 'failed bycrypt'
                 });
             }
-           
             if(result)
             {
                 return res.status(200).json({
-                    message: 'Auth successful',
-                    token: token 
+                    message: 'Auth successful' 
                 });
             }
-
-            return res.status(401).json({
+            res.status(401).json({
                 message: 'Auth failed'
             });
-        });
+        }); 
     })
     .catch(err => {
         console.log(err);
@@ -203,3 +200,4 @@ exports.user_login = (req, res, next) =>{
         });
     });
 }
+
