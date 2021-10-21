@@ -4,7 +4,7 @@ const bycrypt = require('bcryptjs');
 
 exports.user_get_all = (req, res, next) => {
     User.find()
-    .select('_id username role')
+    .select('_id username role projects')
     .exec()
     .then(docs => {
         const response = {
@@ -14,6 +14,7 @@ exports.user_get_all = (req, res, next) => {
                     _id: doc._id,
                     username: doc.username,
                     role: doc.role,
+                    projects: doc.projects,
                     request : {
                         type : 'GET',
                         url : 'https://mysterious-reef-01698.herokuapp.com/' + doc._id
@@ -33,7 +34,7 @@ exports.user_get_all = (req, res, next) => {
 
 exports.user_get_single = (req, res, next) =>{
     User.find({username: req.params.username})
-    .select('_id role')
+    .select('_id role projects')
     .exec()
     .then(doc => {
         if(doc)
@@ -65,15 +66,14 @@ exports.user_get_single = (req, res, next) =>{
 
 //Change to find user by email
 exports.user_patch = (req, res, next) =>{
-    const username = req.params.username;
+    const id = req.params.username;
     const updateOps = {};
 
     for(const ops of req.body)
     {
         updateOps[ops.propName] = ops.value;
     }
-
-    User.update({email: id}, {$set: updateOps}).exec()
+    User.update({username: id}, {$set: updateOps}).exec()
     .then(result => {
         res.status(200).json({
             message: 'User updated',
