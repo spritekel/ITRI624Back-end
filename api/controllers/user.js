@@ -4,7 +4,7 @@ const bycrypt = require('bcryptjs');
 
 exports.user_get_all = (req, res, next) => {
     User.find()
-    .select('_id idNum fName lName email')
+    .select('_id username role')
     .exec()
     .then(docs => {
         const response = {
@@ -14,7 +14,6 @@ exports.user_get_all = (req, res, next) => {
                     _id: doc._id,
                     username: doc.username,
                     role: doc.role,
-                    password : doc.password,
                     request : {
                         type : 'GET',
                         url : 'https://mysterious-reef-01698.herokuapp.com/' + doc._id
