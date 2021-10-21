@@ -7,11 +7,11 @@ require('dotenv').config();
 
 router.get('/',ProjectController.projects_get_all);
 
-router.get('/:username', ProjectController.projects_get_single);
+router.get('/:projName', ProjectController.projects_get_single);
 
-router.patch('/:username', ProjectController.projects_patch);
+router.patch('/:projName', ProjectController.projects_patch);
 
-router.delete('/:username',ProjectController.projects_delete);
+router.delete('/:projName',ProjectController.projects_delete);
 
 router.post('/project_create', ProjectController.projects_create);
 
