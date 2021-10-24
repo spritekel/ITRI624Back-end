@@ -34,7 +34,7 @@ exports.user_get_all = (req, res, next) => {
 
 exports.user_get_single = (req, res, next) =>{
     User.find({username: req.params.username})
-    .select('_id role projects')
+    .select('_id username role projects')
     .exec()
     .then(doc => {
         if(doc)
