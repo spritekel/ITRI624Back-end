@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 exports.projects_get_all = (req, res, next) => {
     Projects.find()
-    .select('_id projName projUsers')
+    .select('_id projName projUsers sprints')
     .exec()
     .then(docs => {
         const response = {
@@ -13,6 +13,7 @@ exports.projects_get_all = (req, res, next) => {
                     _id: doc._id,
                     projName: doc.projName,
                     projUsers: doc.projUsers,
+                    sprints: doc.sprints,
                     request : {
                         type : 'GET',
                         url : 'https://mysterious-reef-01698.herokuapp.com/' + doc._id
@@ -32,7 +33,7 @@ exports.projects_get_all = (req, res, next) => {
 
 exports.projects_get_single = (req, res, next) =>{
     Projects.find({projName: req.params.projName})
-    .select('_id projName projUsers')
+    .select('_id projName projUsers sprints')
     .exec()
     .then(doc => {
         if(doc)
@@ -93,7 +94,7 @@ exports.projects_patch = (req, res, next) =>{
 
 //change to find user by email
 exports.projects_delete = (req, res, next) =>{
-    const projName = req.params.projName;
+    const id = req.params.projName;
     Projects.remove({projName: id}).exec()
     .then(result => {
         res.status(200).json({
@@ -104,7 +105,8 @@ exports.projects_delete = (req, res, next) =>{
                 body: {
                     id : 'String',
                     projName: 'String',
-                    projUsers: 'String'
+                    projUsers: 'String',
+                    Sprints: 'String'
                 }
             }
         });
@@ -132,7 +134,8 @@ exports.projects_create = (req, res, next) =>{
             const project = new Projects({
                 _id : new mongoose.Types.ObjectId(),
                 projName: req.body.projName,
-                projUsers: req.body.projUsers
+                projUsers: req.body.projUsers,
+                sprints: req.body.sprints
             });
             project.save()
             .then(result => {
