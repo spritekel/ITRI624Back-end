@@ -118,35 +118,25 @@ exports.sprint_delete = (req, res, next) =>{
 
 exports.sprint_create = (req, res, next) =>{
     Sprints.find({sprName: req.body.sprName}).exec()
-    .then(sprints => {
-        if(sprints.length > 0)
-        {
-            return res.status(422).json({
-                message: 'sprint already exists in database'
+    .then(() => {
+        const sprint = new Sprints({
+            _id : new mongoose.Types.ObjectId(),
+            sprName: req.body.sprName,
+            project: req.body.project
+        });
+        sprint.save()
+        .then(result => {
+            console.log(result);
+            res.status(201).json({
+                message: 'sprint created'
             });
-        }
-        else
-        {
-            //console.log(req.body.password)
-            const sprint = new Sprints({
-                _id : new mongoose.Types.ObjectId(),
-                sprName: req.body.sprName,
-                project: req.body.project
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
             });
-            sprint.save()
-            .then(result => {
-                console.log(result);
-                res.status(201).json({
-                    message: 'sprint created'
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    error: err
-                });
-            });
-        }
+        });
     })
 }
         
