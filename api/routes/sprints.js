@@ -7,7 +7,7 @@ require('dotenv').config();
 
 router.get('/',SprintsController.sprint_get_all);
 
-router.get('/:sprName', SprintsController.sprint_get_single);
+router.get('/:project', SprintsController.sprint_get_single);
 
 router.patch('/:sprName', SprintsController.sprint_patch);
 

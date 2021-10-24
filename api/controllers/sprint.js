@@ -31,7 +31,7 @@ exports.sprint_get_all = (req, res, next) => {
 }
 
 exports.sprint_get_single = (req, res, next) =>{
-    Sprints.find({sprName: req.params.sprName})
+    Sprints.find({project: req.params.project})
     .select('_id sprName project')
     .exec()
     .then(doc => {
