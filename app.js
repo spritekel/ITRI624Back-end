@@ -8,6 +8,7 @@ require('dotenv').config();
 const userRoute = require('./api/routes/user');
 const projectsRoute = require('./api/routes/projects');
 const sprintRouter = require('./api/routes/sprints');
+const kanbanRouter = require('./api/routes/kanban');
 
 mongoose.connect('mongodb+srv://testuser:' + process.env.DB_PASSWORD + '@itri624users.h5egg.mongodb.net/' + process.env.DB_NAME +'?retryWrites=true&w=majority',{
     useNewUrlParser: true,
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 app.use('/user',userRoute);
 app.use('/project', projectsRoute);
 app.use('/sprint', sprintRouter);
+app.use('/kanban', kanbanRouter);
 
 app.use((req, res, next) => {
     const error = new Error('Not found!');

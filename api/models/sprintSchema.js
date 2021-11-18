@@ -8,12 +8,12 @@ const sprintSchema =  mongoose.Schema({
     lists: [
         {
             _id: mongoose.Schema.Types.ObjectId,
-            listName: {type: String, required: true},
+            listName: {type: String, required: true, default: ''},
             tasks: [
                 {
                     _id: mongoose.Schema.Types.ObjectId,
-                    taskName: {type: String, required: true},
-                    taskUsers: [{type: String, ref: 'User'}],
+                    taskName: {type: String, required: true, default: ''},
+                    taskUsers: [{type: String, ref: 'User', default: ''}],
                 } 
             ]
         }

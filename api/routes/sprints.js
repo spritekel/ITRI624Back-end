@@ -9,10 +9,6 @@ router.get('/',SprintsController.sprint_get_all);
 
 router.get('/:project', SprintsController.sprint_get_single);
 
-router.get('/:sprId', SprintsController.sprint_get_lists);
-
-router.patch('/:sprId', SprintsController.sprint_update_lists);
-
 router.patch('/:sprName', SprintsController.sprint_patch);
 
 router.delete('/:sprName',SprintsController.sprint_delete);
