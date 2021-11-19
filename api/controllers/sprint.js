@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 exports.sprint_get_all = (req, res, next) => {
     Sprints.find()
-    .select('_id sprName project')
+    .select('_id sprName project startDate endDate lists')
     .exec()
     .then(docs => {
         const response = {
@@ -13,6 +13,9 @@ exports.sprint_get_all = (req, res, next) => {
                     _id: doc._id,
                     sprName: doc.sprName,
                     project: doc.project,
+                    startDate : doc.startDate,
+                    endDate : doc.endDate,
+                    lists: doc.lists,
                     request : {
                         type : 'GET',
                         url : 'https://mysterious-reef-01698.herokuapp.com/' + doc._id
@@ -123,7 +126,10 @@ exports.sprint_create = (req, res, next) =>{
         const sprint = new Sprints({
             _id : new mongoose.Types.ObjectId(),
             sprName: req.body.sprName,
-            project: req.body.project
+            project: req.body.project,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate,
+            lists: req.body.lists
         });
         sprint.save()
         .then(result => {

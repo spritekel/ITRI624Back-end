@@ -65,7 +65,7 @@ exports.projects_get_single = (req, res, next) =>{
 
 //Change to find user by email
 exports.projects_patch = (req, res, next) =>{
-    const projName = req.params.projName;
+    const id = req.params.projName;
     const updateOps = {};
 
     for(const ops of req.body)

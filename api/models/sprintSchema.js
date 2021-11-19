@@ -5,6 +5,8 @@ const sprintSchema =  mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     sprName: {type: String, required: false},
     project: {type: String, ref: 'Projects'},
+    startDate: {type: String, required: false},
+    endDate: {type: String, required: false},
     lists: [
         {
             _id: mongoose.Schema.Types.ObjectId,
@@ -13,7 +15,7 @@ const sprintSchema =  mongoose.Schema({
                 {
                     _id: mongoose.Schema.Types.ObjectId,
                     taskName: {type: String, required: true, default: ''},
-                    taskUsers: [{type: String, ref: 'User', default: ''}],
+                    taskUsers: [{type: String, default: ''}],
                 } 
             ]
         }
